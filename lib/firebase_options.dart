@@ -17,15 +17,24 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,38 +52,11 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCEDSupY8VIkcVYuQgbmqVSoGwuKZtFIpU',
-    appId: '1:712528309288:web:3ecb3a495a424c923b191d',
-    messagingSenderId: '712528309288',
-    projectId: 'mini-feed-b740d',
-    authDomain: 'mini-feed-b740d.firebaseapp.com',
-    storageBucket: 'mini-feed-b740d.firebasestorage.app',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDtmvW0okvbDvSZ7Peb8PnXAuHJ23_-atY',
     appId: '1:712528309288:android:8f6aed5d31b4184a3b191d',
     messagingSenderId: '712528309288',
     projectId: 'mini-feed-b740d',
     storageBucket: 'mini-feed-b740d.firebasestorage.app',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyATF-2DkZzK12Qk5uy0hhb1sjvf9VnsiE0',
-    appId: '1:712528309288:ios:81c3dccc8ba6d6113b191d',
-    messagingSenderId: '712528309288',
-    projectId: 'mini-feed-b740d',
-    storageBucket: 'mini-feed-b740d.firebasestorage.app',
-    iosBundleId: 'com.example.miniFeed',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyATF-2DkZzK12Qk5uy0hhb1sjvf9VnsiE0',
-    appId: '1:712528309288:ios:e794a1954f5750463b191d',
-    messagingSenderId: '712528309288',
-    projectId: 'mini-feed-b740d',
-    storageBucket: 'mini-feed-b740d.firebasestorage.app',
-    iosBundleId: 'com.example.miniFeed.RunnerTests',
   );
 }

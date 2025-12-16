@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mini_feed/providers/post_providers.dart';
 
@@ -28,9 +29,15 @@ class FeedNotifier extends AsyncNotifier<List<Post>> {
     return [];
   }
 
-  Future<void> addPost(Post post) async {
+  Future<void> createPost({
+    required File imageFile,
+    required String caption,
+  }) async {
     try {
-      await _repository.addPost(post);
+      await _repository.createPost(
+        imageFile: imageFile,
+        caption: caption,
+      );
     } catch (e, st) {
       state = AsyncError(e, st);
     }

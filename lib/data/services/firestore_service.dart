@@ -14,6 +14,7 @@ class FireStoreService {
   Future<void> addPost(Map<String, dynamic> postData) async {
     try {
       await _postsRef.add(postData);
+      print(' Writing to Firestore: $postData');
     } catch (e) {
       rethrow;
     }
