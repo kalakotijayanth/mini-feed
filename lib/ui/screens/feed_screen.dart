@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/utils/helper.dart';
 import '../../providers/post_providers.dart';
 import '../widgets/post_card.dart';
 
@@ -9,16 +10,19 @@ class FeedScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final repository = ref.read(postRepositoryProvider);
-
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Mini Feed'),
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: appBarHeight,
+        child: MyAppBar(
+          title: 'Mini Feed',
+          showBack: false,
+        ),
       ),
       body: StreamBuilder(
         stream: repository.getPosts(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState ==
-              ConnectionState.waiting) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -47,6 +51,7 @@ class FeedScreen extends ConsumerWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: primaryColor,
         onPressed: () {
           Navigator.pushNamed(context, '/create');
         },
