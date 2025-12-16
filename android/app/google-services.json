@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "712528309288",
+    "project_id": "mini-feed-b740d",
+    "storage_bucket": "mini-feed-b740d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712528309288:android:8f6aed5d31b4184a3b191d",
+        "android_client_info": {
+          "package_name": "com.example.mini_feed"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtmvW0okvbDvSZ7Peb8PnXAuHJ23_-atY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
