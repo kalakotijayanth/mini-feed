@@ -16,7 +16,7 @@ A simple social feed application built using Flutter and Firebase where users ca
 ## state Mangement
 - Used `AsyncNotifier` and `AsyncValue` for managing loading, success, and error states.
 
-## state Mangement
+## project setup locally
 project setup locally
 
 git clone <your-repo-url>
