@@ -51,6 +51,8 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final postState = ref.watch(feedNotifierProvider);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -83,7 +85,7 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen> {
               backgroundColor: primaryColor,
               foregroundColor: Colors.white,
             ),
-            onPressed: _pickImage,
+            onPressed:  _pickImage,
 
             child: const Text('Pick Image'),
           ),
@@ -93,14 +95,22 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen> {
           const SizedBox(height: 16),
 
 
-
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: primaryColor,
               foregroundColor: Colors.white,
             ),
-            onPressed: _submitPost,
-            child: const Text('Post'),
+            onPressed: postState.isLoading ? null : _submitPost,
+            child: postState.isLoading
+                ? const SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: Colors.white,
+              ),
+            )
+                : const Text('Post'),
           ),
         ],
       ),

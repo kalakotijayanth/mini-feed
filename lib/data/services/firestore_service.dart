@@ -14,7 +14,6 @@ class FireStoreService {
   Future<void> addPost(Map<String, dynamic> postData) async {
     try {
       await _postsRef.add(postData);
-      print(' Writing to Firestore: $postData');
     } catch (e) {
       rethrow;
     }
@@ -22,7 +21,7 @@ class FireStoreService {
 
   Future<void> updateLikes({
     required String postId,
-    required bool isLike,
+    required String userId,
   }) async {
     final postDocRef = _postsRef.doc(postId);
 
@@ -33,15 +32,22 @@ class FireStoreService {
         throw Exception('Post does not exist');
       }
 
-      final currentLikes =
-          (snapshot.data()?['likesCount'] as int?) ?? 0;
+      final data = snapshot.data()!;
+      final int currentLikes = data['likesCount'] ?? 0;
+      final List likedBy = data['likedBy'] ?? [];
 
-      final updatedLikes =
-      isLike ? currentLikes + 1 : currentLikes - 1;
-
-      transaction.update(postDocRef, {
-        'likesCount': updatedLikes < 0 ? 0 : updatedLikes,
-      });
+      if (likedBy.contains(userId)) {
+        transaction.update(postDocRef, {
+          'likesCount': currentLikes - 1,
+          'likedBy': FieldValue.arrayRemove([userId]),
+        });
+      } else {
+        transaction.update(postDocRef, {
+          'likesCount': currentLikes + 1,
+          'likedBy': FieldValue.arrayUnion([userId]),
+        });
+      }
     });
   }
+
 }

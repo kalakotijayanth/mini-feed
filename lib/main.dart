@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mini_feed/ui/screens/create_post_screen.dart';
 import 'package:mini_feed/ui/screens/feed_screen.dart';
+import 'package:mini_feed/ui/screens/post_details_screen.dart';
 
 import 'firebase_options.dart';
 
@@ -45,6 +46,12 @@ class MyApp extends StatelessWidget {
 
       routes: {
         '/create': (_) => const CreatePostScreen(),
+        '/postDetail': (context) {
+          final postId =
+          ModalRoute.of(context)!.settings.arguments as String;
+
+          return PostDetailsScreen(postId: postId);
+        },
       },
     );
   }

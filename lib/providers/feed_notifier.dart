@@ -34,10 +34,13 @@ class FeedNotifier extends AsyncNotifier<List<Post>> {
     required String caption,
   }) async {
     try {
+      state = const AsyncLoading();
+
       await _repository.createPost(
         imageFile: imageFile,
         caption: caption,
       );
+
     } catch (e, st) {
       state = AsyncError(e, st);
     }
@@ -45,12 +48,13 @@ class FeedNotifier extends AsyncNotifier<List<Post>> {
 
   Future<void> toggleLike({
     required String postId,
-    required bool isLike,
+    required String userId,
+
   }) async {
     try {
       await _repository.updateLikes(
         postId: postId,
-        isLike: isLike,
+        userId: userId
       );
     } catch (e, st) {
       state = AsyncError(e, st);

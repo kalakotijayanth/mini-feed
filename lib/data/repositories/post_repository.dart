@@ -35,6 +35,7 @@ class PostRepository {
         userName: 'User',
         likesCount: 0,
         createdAt: DateTime.now(),
+        likedBy:  []
       );
 
       await _firestoreService.addPost(post.toMap());
@@ -45,12 +46,12 @@ class PostRepository {
 
   Future<void> updateLikes({
     required String postId,
-    required bool isLike,
+    required String userId,
   }) async {
     try {
       await _firestoreService.updateLikes(
         postId: postId,
-        isLike: isLike,
+        userId: userId
       );
     } catch (e) {
       rethrow;

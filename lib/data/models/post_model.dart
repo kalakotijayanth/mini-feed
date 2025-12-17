@@ -7,7 +7,7 @@ class Post {
   final String userName;
   final int likesCount;
   final DateTime createdAt;
-
+  final List<String> likedBy;
   const Post({
     required this.id,
     required this.imageUrl,
@@ -15,6 +15,7 @@ class Post {
     required this.userName,
     required this.likesCount,
     required this.createdAt,
+    required this.likedBy,
   });
 
   factory Post.fromFirestore(
@@ -28,8 +29,8 @@ class Post {
       caption: data?['caption'].toString() ?? '',
       userName: data?['userName'].toString() ?? 'Anonymous',
       likesCount: data?['likesCount'] as int? ?? 0,
-      createdAt: (data?['createdAt'] as Timestamp?)?.toDate() ??
-          DateTime.now(),
+      createdAt: (data?['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      likedBy: List<String>.from(data?['likedBy'] ?? []),
     );
   }
 
@@ -40,6 +41,7 @@ class Post {
       'userName': userName,
       'likesCount': likesCount,
       'createdAt': Timestamp.fromDate(createdAt),
+      'likedBy': likedBy,
     };
   }
 }

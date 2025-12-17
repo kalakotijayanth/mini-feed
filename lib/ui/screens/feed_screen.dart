@@ -3,12 +3,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/utils/helper.dart';
 import '../../providers/post_providers.dart';
 import '../widgets/post_card.dart';
+import 'network_error.dart';
 
-class FeedScreen extends ConsumerWidget {
+
+
+class FeedScreen extends ConsumerStatefulWidget {
   const FeedScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _FeedScreenState createState() => _FeedScreenState();
+}
+
+class _FeedScreenState extends ConsumerState<FeedScreen> {
+  @override
+  Widget build(BuildContext context) {
     final repository = ref.read(postRepositoryProvider);
     return Scaffold(
       backgroundColor: Colors.white,
@@ -29,8 +37,8 @@ class FeedScreen extends ConsumerWidget {
           }
 
           if (snapshot.hasError) {
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
+            return NetworkErrorScreen(
+              onRetry: () => setState(() {}),
             );
           }
 

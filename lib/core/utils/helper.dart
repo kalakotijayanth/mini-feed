@@ -128,3 +128,13 @@ pleaseSelectAlert(BuildContext context, String text) {
     },
   );
 }
+
+
+enum Status{
+  Stable,
+  Loading,
+  Success,
+  NetworkError,
+  Error,
+  NoData,
+}

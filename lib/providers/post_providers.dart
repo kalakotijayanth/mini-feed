@@ -10,3 +10,4 @@ final storageServiceProvider = Provider((ref) => StorageService());
 
 final postRepositoryProvider = Provider((ref) => PostRepository(ref.read(firestoreServiceProvider), ref.read(storageServiceProvider),),);
 final feedNotifierProvider = AsyncNotifierProvider<FeedNotifier, List<Post>>(FeedNotifier.new,);
+
